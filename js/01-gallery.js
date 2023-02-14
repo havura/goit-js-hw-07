@@ -19,20 +19,26 @@ const createGalleryItems = galleryItems
   })
   .join('');
 
-const clickOnGalleryColection = (event) => {
-    event.preventDefault();
-    
-    const { target } = event;
+const clickOnGalleryColection = event => {
+  event.preventDefault();
 
-    if (target.nodeName !== 'IMG') {
+  const { target } = event;
+
+  if (target.nodeName !== 'IMG') {
     return;
   }
 
   const instance = basicLightbox.create(`
     <img src= "${target.dataset.source}">
 `);
-    instance.show();
-    
+
+  instance.show();
+
+  galerryColection.addEventListener('keydown', event => {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  });
 };
 
 galerryColection.insertAdjacentHTML('afterbegin', createGalleryItems);
