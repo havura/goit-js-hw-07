@@ -27,26 +27,27 @@ const clickOnGalleryColection = event => {
   if (target.nodeName !== 'IMG') {
     return;
   }
-};
 
-const instance = basicLightbox.create(
-  `
+  const instance = basicLightbox.create(
+    `
     <img src= "${target.dataset.source}">
 `,
-  {
-    onShow: instance => {
-      window.addEventListener('keydown', onEscapePress);
-    },
-    onclose: instance => {
-      window.removeEventListener('keydown', onEscapePress);
-    },
-  }
-);
-instance.show();
+    {
+      onShow: instance => {
+        window.addEventListener('keydown', onEscapePress);
+      },
+      onclose: instance => {
+        window.removeEventListener('keydown', onEscapePress);
+      },
+    }
+  );
+  instance.show();
 
-function onEscapePress(event) {
-  if (event.code === 'Escape') {
-    instance.close();
+  function onEscapePress(event) {
+    const ESC_KEY_CODE = 'Escape';
+    if (event.code === 'Escape') {
+      instance.close();
+    }
   }
 }
 
